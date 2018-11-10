@@ -96,9 +96,11 @@
             drawBul();
             drawEne();
             drawMessage();
+            hit();
             
             console.log("pX: "+pX);
             //console.log("bY: "+bY);
+            console.log('eW'+eW);
         requestAnimationFrame(draw);
         } draw();
         document.addEventListener("keydown", KeyDownHandler, false);
@@ -126,7 +128,11 @@
         c.textAlign = "center";
         c.font = '75px serif';
         c.fillText('Press D(<-) or A(->)  ',midX,endY*.1);
-    }
+        }
+        function hit() {
+            if (bX<eX&& bX<eX+eW&& bY<eY&&bY<eY+eH) 
+                eW+=10;
+        }
     </script>
 </body>
 </html>
