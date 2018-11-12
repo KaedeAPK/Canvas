@@ -37,9 +37,11 @@
         // Enemy Direction
         var drc = 1;
         
-        var pSpd = 12; var eSpd = 16;
+        var pSpd = 12; var eSpd = 10;
         var bSpd = 48; 
-
+        
+        var eHP = 100;
+        var point = 0;
         
 
         function drawPlayer() {
@@ -96,9 +98,11 @@
             drawBul();
             drawEne();
             drawMessage();
+            hit();
             
             console.log("pX: "+pX);
             //console.log("bY: "+bY);
+            console.log('eW'+eW);
         requestAnimationFrame(draw);
         } draw();
         document.addEventListener("keydown", KeyDownHandler, false);
@@ -125,8 +129,14 @@
         c.fillStyle = '#fff';
         c.textAlign = "center";
         c.font = '75px serif';
-        c.fillText('Press D(<-) or A(->)  ',midX,endY*.1);
-    }
+        c.fillText('Press D(<-) or A(->)  HP:'+eHP,midX,endY*.1);
+        }
+        function hit() {
+            if (bX>eX&& bX<eX+eW&& bY<eY&&bY<eY+eH) 
+                eHP -= 1;
+            if (eHP < 0)
+                c.fillText("CLEAR!",midX,midY,500);
+        }
     </script>
 </body>
 </html>
