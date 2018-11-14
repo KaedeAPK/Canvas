@@ -27,18 +27,21 @@
         
         // Bullets starting point
         var bX = pX; var bY = pY;
+        
         // Players width and height
         var pW = 40; var pH = 80;
         // Bullets width
-        var bW = 10;
+        var bW = 10; var eBW = 20;
         // Enemy's Starting point
         var eX = endX/2; var eY = endY/3;
         var eW = 60; var eH = 120;
+        // Enemy's bullet's starting point
+        var eBX = eX; var eBY = eY;
         // Enemy Direction
         var drc = 1;
         
         var pSpd = 12; var eSpd = 10;
-        var bSpd = 48; 
+        var bSpd = 48; var eBSpd = 24;
         
         var eHP = 100;
         var point = 0;
@@ -91,18 +94,33 @@
             if (eX < 0)
                 drc *= -1;
         }
+        function drawEneBul() {
+            c.beginPath();
+            c.fillStyle = '#f00';
+            c.arc(eBX,eBY,eBW,0,10,false);
+            c.stroke();
+            c.fill();
+            c.closePath();
+
+            if(eBY > endY) {
+                eBX = eX;eBY = eY;
+            } else {
+                eBY += eBSpd;
+            } 
+        }
 
         function draw() {
             c.clearRect(0,0,endX,endY);
             drawPlayer();
             drawBul();
             drawEne();
+            drawEneBul();
             drawMessage();
             hit();
             
             console.log("pX: "+pX);
             //console.log("bY: "+bY);
-            console.log('eW'+eW);
+            console.log('eBX : ' + eBX);
         requestAnimationFrame(draw);
         } draw();
         document.addEventListener("keydown", KeyDownHandler, false);

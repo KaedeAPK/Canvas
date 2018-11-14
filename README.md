@@ -5,6 +5,7 @@
 
 * touch event
 * enemy's shoot drawing
+* bullets multi drawing
 * enemy's shoot hit script
 * hit effect animation
 
