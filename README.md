@@ -8,8 +8,8 @@
 * hit effect animation
 
 
-## 32bit game
-* 32x32 dot sheet, sx, sy, cuting
+## 32bit game with shooting method
+* 32x32 dot sheet, sx, sy, cutting
 * sample
 
 ## Roll Play game
