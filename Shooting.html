@@ -161,8 +161,8 @@
                 c.fillText("YOU DEAD!",midX,midY,500);
             }
             // enemy's bul with Player
-            if (pX -eBW < eBX && eBX<pX+pW + eBW && 
-                pY + pH -eBW < eBY && eBY < eY + eBW)
+            if (pX-pW < eBX+eBW&& eBX-eBW < pX + pW&&
+                pY < eBY+eBW && eBY-eBW < pY+pH)
                 pHP -= 1;
         }
     </script>
