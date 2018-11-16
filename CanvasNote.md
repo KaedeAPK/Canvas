@@ -55,7 +55,20 @@
     c.fillStyle = '#fff';
     c.textAlign = "center";
     c.font = '75px serif';
-    c.fillText('🎃Happy Halloween!!!🎃',cW/2,cH*.1);
+    c.fillText('🎃Happy Halloween!!!🎃',endX/2,endY*.1);
+
+## Measure Text width
+    var text = c.measureText("foo"); // TextMetrics オブジェクト
+    text.width; // 16;
+
+## Draw Text Easily
+    function drawText(str,x,y,color) {
+    c.beginPath();
+    c.fillStyle = color;
+    c.textAlign = "center";
+    c.font = '75px serif';
+    c.fillText(str,x,y);
+    } drawText('ok',endX/4,endY/2,'#f3f');
 
 ## Bezier Line
     // 2D bezier curve line.
