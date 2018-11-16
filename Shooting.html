@@ -148,6 +148,8 @@
         c.textAlign = "center";
         c.font = '75px serif';
         c.fillText('Press D(<-) or A(->)  HP:'+eHP,midX,endY*.1);
+        c.font = '45px serif';
+        c.fillText('Player HP :' + pHP, endX*.12, endY*.9);
         }
         function hit() {
             if (bX>eX&& bX<eX+eW&& 
@@ -156,8 +158,8 @@
             if (eHP < 0)
                 c.fillText("CLEAR!",midX,midY,500);
             // enemy's bul with Player
-            if (pX < eBX && eBX<pX+pW && 
-                pY + pH < eBY && eBY < eY)
+            if (pX -eBW < eBX && eBX<pX+pW + eBW && 
+                pY + pH -eBW < eBY && eBY < eY + eBW)
                 pHP -= 1;
         }
     </script>
