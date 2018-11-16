@@ -1,7 +1,5 @@
-# Canvas
-
-## Shooting Game
-### TASKS
+# Shooting Game
+## TASKS
 
 * touch event
 * enemy's shoot drawing
