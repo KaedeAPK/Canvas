@@ -31,12 +31,14 @@
         // Players width and height
         var pW = 40; var pH = 80;
         // Bullets width
-        var bW = 10; var eBW = 20;
+        var bW = 10; var eBW = endY*0.04;
         // Enemy's Starting point
         var eX = endX/2; var eY = endY/3;
         var eW = 60; var eH = 120;
         // Enemy's bullet's starting point
         var eBX = eX; var eBY = eY;
+        var eBX2 = eX-2; var eBX3 = eX+2;
+        
         // Enemy Direction
         var drc = 1;
         
@@ -44,8 +46,14 @@
         var bSpd = 48; var eBSpd = 12;
         
         var eHP = 50; var pHP = 25;
-        var point = 0; 
+        var point = 0;
         
+        function drawCircle(x, y, r, color) {
+            c.beginPath();
+            c.arc(x, y, r, 0, 2*Math.PI, false);
+            c.fillStyle = color;
+            c.fill();
+        }
 
         function drawPlayer() {
             c.beginPath();
@@ -63,6 +71,7 @@
             else if (left && pSpd<pX)
                 pX -= pSpd;
         }
+
         function drawBul() {
             c.beginPath();
             c.fillStyle = '#bbb';
@@ -95,18 +104,19 @@
                 drc *= -1;
         }
         function drawEneBul() {
-            c.beginPath();
-            c.fillStyle = '#f00';
-            c.arc(eBX,eBY,eBW,0,10,false);
-            c.stroke();
-            c.fill();
-            c.closePath();
-
+            drawCircle(eBX,eBY,eBW,'#f00');
+            drawCircle(eBX2,eBY,eBW,'#f00');
+            drawCircle(eBX3,eBY,eBW,'#f00');
+            
             if(eBY > endY) {
                 eBX = eX;eBY = eY;
+                eBX2 = eX-2; eBX3 = eX+2;
             } else {
                 eBY += eBSpd;
+                eBX2 += eBSpd;
+                eBX3 -= eBSpd;
             } 
+            
         }
 
         function draw() {
@@ -168,6 +178,12 @@
             }
             // enemy's bul with Player
             if (pX-pW < eBX+eBW&& eBX-eBW < pX + pW&&
+                pY < eBY+eBW && eBY-eBW < pY+pH)
+                pHP -= 1;
+            if (pX-pW < eBX2+eBW&& eBX2-eBW < pX + pW&&
+                pY < eBY+eBW && eBY-eBW < pY+pH)
+                pHP -= 1;
+            if (pX-pW < eBX3+eBW&& eBX3-eBW < pX + pW&&
                 pY < eBY+eBW && eBY-eBW < pY+pH)
                 pHP -= 1;
         }
