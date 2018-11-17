@@ -122,12 +122,14 @@
 
         function draw() {
             c.clearRect(0,0,endX,endY);
+            drawHPBar();
             drawPlayer();
             drawBul();
             drawEne();
             drawEneBul();
             drawMessage();
             hit();
+            
             
             console.log("eBX: "+eBX);
             //console.log("bY: "+bY);
@@ -161,6 +163,14 @@
         c.fillText('Press D(<-) or A(->)  HP :'+eHP,midX,endY*.1);
         c.font = '45px serif';
         c.fillText('Player HP : ' + pHP, endX*.12, endY*.9);
+        }
+        function drawHPBar() {
+            c.beginPath();
+            c.fillStyle = '#f00';
+            c.fillRect(0,0,endX/50*eHP,endY*.03);
+            c.fillStyle = '#00f';
+            c.fillRect(0,endY*.97,endX/25*pHP,endY);
+            c.closePath();
         }
         function hit() {
             c.font = '75px serif';
