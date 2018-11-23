@@ -134,8 +134,10 @@
             console.log("eBX: "+eBX);
             //console.log("bY: "+bY);
             console.log('eBY: ' + eBY);
-        requestAnimationFrame(draw);
+
+            requestAnimationFrame(draw);
         } draw();
+
         document.addEventListener("keydown", KeyDownHandler, false);
         document.addEventListener("keyup", KeyUpHandler, false);
 
@@ -183,13 +185,14 @@
                 c.fillText("YOU DEAD!",midX,midY,600);
                 eSpd = 0; pSpd = 0;
             }
-            
         }
+
         function decision() {
             // player's bul with Enemy
             if (eX - eW < bX + bW && bX - bW < eX+eW && 
-                bY + bW < eY && bY < eY+eH) 
+                bY - bW < eY && bY + bW < eY - eH) 
                 eHP -= 1;
+
             // enemy's bul with Player
             if (pX-pW < eBX+eBW && eBX-eBW < pX + pW&&
                 pY < eBY+eBW && eBY-eBW < pY+pH)
