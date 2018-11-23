@@ -17,9 +17,9 @@
         var endX = canvas.width = window.innerWidth;
         var endY = canvas.height = window.innerHeight;
         var c = canvas.getContext('2d');
-        var midX = endX/2;
-        var midY = endY/2;
-        c.lineWidth = 2;
+        const midX = endX/2;
+        const midY = endY/2;
+        c.lineWidth = 5;
         
         // Players Starting point
         var pX = midX; var pY = endY - 60;
@@ -29,7 +29,7 @@
         var bX = pX; var bY = pY;
         
         // Players width and height
-        var pW = 40; var pH = 80;
+        var pW = 40; var pH = 120;
         // Bullets width
         var bW = 10; var eBW = endY*0.04;
 
@@ -75,6 +75,7 @@
 
         function drawBul() {
             c.beginPath();
+            c.lineWidth = 5;
             c.fillStyle = '#bbb';
             c.arc(bX,bY,bW,0,10,false);
             c.stroke();
@@ -162,7 +163,8 @@
         c.fillStyle = '#fff';
         c.textAlign = "center";
         c.font = '75px serif';
-        c.fillText('Press D(<-) or A(->)  HP :'+eHP,midX,endY*.1);
+        c.fillText('Press D(<-) or A(->)',midX*.8,endY*.1);
+        c.fillText('HP :'+eHP,endX*.7,endY*.1);
         c.font = '45px serif';
         c.fillText('Player HP : ' + pHP, endX*.12, endY*.9);
         }
@@ -170,15 +172,17 @@
             c.beginPath();
             c.fillStyle = '#f00';
             c.fillRect(0,0,endX/50*eHP,endY*.03);
-            c.fillStyle = '#00f';
-            c.fillRect(0,endY*.97,endX/25*pHP,endY);
+            c.fillStyle = '#04f';
+            c.fillRect(0,endY*0.05,endX/25*pHP,endY*.03)
             c.closePath();
         }
         function decision() {
-            c.font = '75px serif';
+            c.font = '100px serif';
             if (eHP < 0) {
-                c.fillStyle = '#22f';
+                c.fillStyle = 'lightblue';
                 c.fillText("CLEAR!",midX,midY,600);
+                c.fillStyle = '#04f'
+                c.fillText("Score: "+ (pHP*4),midX,midY*1.3,600);
                 gameEnd = true;
             } else if (pHP < 0) {
                 c.fillStyle = '#f22';
@@ -195,7 +199,7 @@
                 // player's bul with Enemy
                 if (eX - eW < bX + bW && bX - bW < eX+eW && 
                     bY - bW < eY && bY + bW < eY - eH) 
-                    eHP -= 1;
+                    eHP -= 1.5;
 
                 // enemy's bul with Player
                 if (pX-pW < eBX+eBW && eBX-eBW < pX + pW&&
