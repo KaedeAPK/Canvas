@@ -47,7 +47,7 @@
         var bSpd = 48; var eBSpd = 12;
         
         var eHP = 50; var pHP = 25;
-        var point = 0;
+        var point = 0; var gameEnd = false;
         
         function drawCircle(x, y, r, color) {
             c.beginPath();
@@ -174,35 +174,40 @@
             c.fillRect(0,endY*.97,endX/25*pHP,endY);
             c.closePath();
         }
-        function hit() {
+        function decision() {
             c.font = '75px serif';
             if (eHP < 0) {
-                c.fillStyle = '#00f';
+                c.fillStyle = '#22f';
                 c.fillText("CLEAR!",midX,midY,600);
-                eSpd = 0; pSpd = 0;
+                gameEnd = true;
             } else if (pHP < 0) {
-                c.fillStyle = '#f00';
+                c.fillStyle = '#f22';
                 c.fillText("YOU DEAD!",midX,midY,600);
-                eSpd = 0; pSpd = 0;
+                gameEnd = true;
+            }
+            if (gameEnd) {
+                eSpd = 0; pSpd = 0; 
             }
         }
 
-        function decision() {
-            // player's bul with Enemy
-            if (eX - eW < bX + bW && bX - bW < eX+eW && 
-                bY - bW < eY && bY + bW < eY - eH) 
-                eHP -= 1;
+        function hit() {
+            if (!gameEnd) {
+                // player's bul with Enemy
+                if (eX - eW < bX + bW && bX - bW < eX+eW && 
+                    bY - bW < eY && bY + bW < eY - eH) 
+                    eHP -= 1;
 
-            // enemy's bul with Player
-            if (pX-pW < eBX+eBW && eBX-eBW < pX + pW&&
-                pY < eBY+eBW && eBY-eBW < pY+pH)
-                pHP -= 1;
-            if (pX-pW < eBX2+eBW&& eBX2-eBW < pX + pW&&
-                pY < eBY+eBW && eBY-eBW < pY+pH)
-                pHP -= 1;
-            if (pX-pW < eBX3+eBW&& eBX3-eBW < pX + pW&&
-                pY < eBY+eBW && eBY-eBW < pY+pH)
-                pHP -= 1;
+                // enemy's bul with Player
+                if (pX-pW < eBX+eBW && eBX-eBW < pX + pW&&
+                    pY < eBY+eBW && eBY-eBW < pY+pH)
+                    pHP -= 1;
+                if (pX-pW < eBX2+eBW&& eBX2-eBW < pX + pW&&
+                    pY < eBY+eBW && eBY-eBW < pY+pH)
+                    pHP -= 1;
+                if (pX-pW < eBX3+eBW&& eBX3-eBW < pX + pW&&
+                    pY < eBY+eBW && eBY-eBW < pY+pH)
+                    pHP -= 1;
+            }
         }
         
     </script>
