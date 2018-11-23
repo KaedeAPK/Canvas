@@ -46,7 +46,7 @@
         var pSpd = 12; var eSpd = 10;
         var bSpd = 48; var eBSpd = 12;
         
-        var eHP = 50; var pHP = 25;
+        var eHP = 35; var pHP = 25;
         var point = 0; var gameEnd = false;
         
         function drawCircle(x, y, r, color) {
@@ -164,9 +164,9 @@
         c.textAlign = "center";
         c.font = '75px serif';
         c.fillText('Press D(<-) or A(->)',midX*.8,endY*.1);
-        c.fillText('HP :'+eHP,endX*.7,endY*.1);
-        c.font = '45px serif';
-        c.fillText('Player HP : ' + pHP, endX*.12, endY*.9);
+        c.fillText('Enemy HP :'+eHP,endX*.7,endY*.1);
+
+        c.fillText('Player HP : ' + pHP,endX*.7,endY*.2);
         }
         function drawHPBar() {
             c.beginPath();
@@ -199,7 +199,7 @@
                 // player's bul with Enemy
                 if (eX - eW < bX + bW && bX - bW < eX+eW && 
                     bY - bW < eY && bY + bW < eY - eH) 
-                    eHP -= 1.5;
+                    eHP -= 2;
 
                 // enemy's bul with Player
                 if (pX-pW < eBX+eBW && eBX-eBW < pX + pW&&
