@@ -187,11 +187,11 @@
         }
         function decision() {
             // player's bul with Enemy
-            if (bX>eX&& bX<eX+eW&& 
-                bY<eY&&bY<eY+eH) 
+            if (eX - eW < bX + bW && bX - bW < eX+eW && 
+                bY + bW < eY && bY < eY+eH) 
                 eHP -= 1;
             // enemy's bul with Player
-            if (pX-pW < eBX+eBW&& eBX-eBW < pX + pW&&
+            if (pX-pW < eBX+eBW && eBX-eBW < pX + pW&&
                 pY < eBY+eBW && eBY-eBW < pY+pH)
                 pHP -= 1;
             if (pX-pW < eBX2+eBW&& eBX2-eBW < pX + pW&&
