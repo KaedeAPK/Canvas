@@ -53,7 +53,10 @@
 ## Draw Text
     c.beginPath();
     c.fillStyle = '#fff';
+    c.textAlign = "right";
+    c.textAlign = "left";
     c.textAlign = "center";
+    
     c.font = '75px serif';
     c.fillText('🎃Happy Halloween!!!🎃',endX/2,endY*.1);
 
