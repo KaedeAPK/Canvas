@@ -166,8 +166,8 @@
         c.beginPath();
         c.fillStyle = '#fff';
         c.textAlign = "center";
-        c.font = '75px serif';
-        c.fillText('Press D(<-) or A(->)',midX*.8,endY*.1);
+        c.font = endX * 0.05 +'px serif';
+        c.fillText('Press D(<-) or A(->) key',midX,endY*.1);
         
         }
         function drawHPBar() {
@@ -186,16 +186,18 @@
             c.closePath();
         }
         function decision() {
-            c.font = '100px serif';
+            c.font = endX * 0.05 +'px serif';
             if (eHP < 0) {
                 c.fillStyle = 'lightblue';
                 c.fillText("CLEAR!",midX,midY,600);
+                c.fillText("Please reload.",midX,midY*1.5,600);
                 c.fillStyle = '#04f'
                 c.fillText("Score: "+ (pHP*4),midX,midY*1.3,600);
-                gameEnd = true;
+                gameEnd = true
             } else if (pHP < 0) {
                 c.fillStyle = '#f22';
                 c.fillText("YOU DEAD!",midX,midY,600);
+                c.fillText("Please reload.",midX,midY*1.5,600);
                 gameEnd = true;
             }
             if (gameEnd) {
