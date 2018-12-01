@@ -13,10 +13,10 @@
         // Press right or d key, Triangle moves right
         // Press left  or a key, left.
         
-        var canvas = document.querySelector('canvas');
-        var endX = canvas.width = window.innerWidth;
-        var endY = canvas.height = window.innerHeight;
-        var c = canvas.getContext('2d');
+        const canvas = document.querySelector('canvas');
+        const endX = canvas.width = window.innerWidth;
+        const endY = canvas.height = window.innerHeight;
+        const c = canvas.getContext('2d');
         const midX = endX/2;
         const midY = endY/2;
         c.lineWidth = 5;
@@ -43,8 +43,8 @@
         // Enemy Direction
         var drc = 1;
         
-        var pSpd = 12; var eSpd = 10;
-        var bSpd = 48; var eBSpd = 12;
+        const pSpd = 12; const eSpd = 10;
+        const bSpd = 48; const eBSpd = 12;
         
         var eHP = 35; var pHP = 25;
         var point = 0; var gameEnd = false;
@@ -172,6 +172,13 @@
             c.beginPath();
             c.fillStyle = '#f00';
             c.fillRect(0,0,endX/50*eHP,endY*.03);
+
+            c.strokeStyle = '#fff';
+            c.fillStyle = '#f55'
+            c.fillRect(eX,eY*1.01,eW,eW/4);
+            c.strokeRect(eX,eY*1.01,eW,eW/4);
+            
+
             c.fillStyle = '#04f';
             c.fillRect(0,endY*0.05,endX/25*pHP,endY*.03)
             c.closePath();
