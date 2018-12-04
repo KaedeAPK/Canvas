@@ -3,8 +3,8 @@
 ## Environment
     // this makes full range of browser.
     var canvas = document.querySelector('canvas');
-    var cW = canvas.width = window.innerWidth;
-    var cH = canvas.height = window.innerHeight;
+    var endX = canvas.width = window.innerWidth;
+    var endY = canvas.height = window.innerHeight;
     var c = canvas.getContext('2d');
     var midX = cW/2;
     var midY = cH/2;
