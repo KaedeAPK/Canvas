@@ -22,11 +22,13 @@
     var midY = endY/2;
     
     var img = new Image();
-    img.src = "monunt.png";
-    c.beginPath();
-    c.drawImage("../Canvas/monunt.png", midX, midY);
-    c.closePath();
-//drawCircle(midX,midY,midY*.2,'#bb0');
+    img.src = "./m2.png";
+    img.onload = function () {
+        c.drawImage(img, midX, midY);
+    }
+    
+    
+    //drawCircle(midX,midY,midY*.2,'#bb0');
 </script>
 </body>
 </html>
