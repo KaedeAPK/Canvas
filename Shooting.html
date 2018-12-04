@@ -13,10 +13,10 @@
         // Press right or d key, Triangle moves right
         // Press left  or a key, left.
         
-        var canvas = document.querySelector('canvas');
-        var endX = canvas.width = window.innerWidth;
-        var endY = canvas.height = window.innerHeight;
-        var c = canvas.getContext('2d');
+        const canvas = document.querySelector('canvas');
+        const endX = canvas.width = window.innerWidth;
+        const endY = canvas.height = window.innerHeight;
+        const c = canvas.getContext('2d');
         const midX = endX/2;
         const midY = endY/2;
         c.lineWidth = 5;
@@ -35,19 +35,23 @@
 
         // Enemy's Starting point
         var eX = endX/2.5; var eY = endY/3;
-        var eW = 60; var eH = 120;
+        const eW = 60; const eH = 120;
         // Enemy's bullet's starting point
         var eBX = eX; var eBY = eY;
         var eBX2 = eX-2; var eBX3 = eX+2;
         
         // Enemy Direction
-        var drc = 1;
+        var drc = 1; //right dir
         
         // Speeds
         var pSpd = 12; var eSpd = 14;
         var bSpd = 48; var eBSpd = 12;
         
-        var eHP = 35; var pHP = 25;
+        const maxEHP = 100; var maxPHP = 25;
+        var eHP = maxEHP; var pHP = maxPHP;
+        var restEHP = maxEHP/eHP;
+        var restPHP = maxPHP/pHP;
+
         var point = 0; var gameEnd = false;
         
         function drawCircle(x, y, r, color) {
@@ -163,31 +167,38 @@
         c.beginPath();
         c.fillStyle = '#fff';
         c.textAlign = "center";
-        c.font = '75px serif';
-        c.fillText('Press D(<-) or A(->)',midX*.8,endY*.1);
-        c.fillText('Enemy HP :'+eHP,endX*.7,endY*.1);
-
-        c.fillText('Player HP : ' + pHP,endX*.7,endY*.2);
+        c.font = endX * 0.05 +'px serif';
+        c.fillText('Press D(<-) or A(->) key',midX,endY*.1);
+        
         }
         function drawHPBar() {
             c.beginPath();
-            c.fillStyle = '#f00';
-            c.fillRect(0,0,endX/50*eHP,endY*.03);
+            c.lineWidth = 1.5;
+            c.strokeStyle = '#fff';
+            c.fillStyle = '#f55'
+            c.fillRect(eX,eY*1.01,eW/100*eHP,eW/4);
+            c.strokeRect(eX,eY*1.01,eW,eW/4);
+            
+
             c.fillStyle = '#04f';
-            c.fillRect(0,endY*0.05,endX/25*pHP,endY*.03)
+            c.fillRect(pX*1.02,pY*1.01,pW/100*pHP*4,pW/4);
+            c.strokeRect(pX*1.02,pY*1.01,pW,pW/4);
+            c.fill(); c.stroke();
             c.closePath();
         }
         function decision() {
-            c.font = '100px serif';
+            c.font = endX * 0.05 +'px serif';
             if (eHP < 0) {
                 c.fillStyle = 'lightblue';
                 c.fillText("CLEAR!",midX,midY,600);
+                c.fillText("Please reload.",midX,midY*1.5,600);
                 c.fillStyle = '#04f'
                 c.fillText("Score: "+ (pHP*4),midX,midY*1.3,600);
                 gameEnd = true;
             } else if (pHP < 0) {
                 c.fillStyle = '#f22';
                 c.fillText("YOU DEAD!",midX,midY,600);
+                c.fillText("Please reload.",midX,midY*1.5,600);
                 gameEnd = true;
             }
             if (gameEnd) {
