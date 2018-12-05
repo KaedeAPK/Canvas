@@ -73,6 +73,13 @@
     c.fillText(str,x,y);
     } drawText('ok',endX/4,endY/2,'#f3f');
 
+## draw Image
+    var img = new Image();
+    img.src = "./m2.png";
+    img.onload = function () {
+        c.drawImage(img, 100, 300, 50, 50);
+    }
+
 ## Bezier Line
     // 2D bezier curve line.
     // (0, 0) to (endX,endY). 
