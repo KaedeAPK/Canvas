@@ -20,14 +20,20 @@
     var c = canvas.getContext('2d');
     var midX = endX/2;
     var midY = endY/2;
+
     document.addEventListener("keydown", KeyDownHandler, false);
     document.addEventListener("keyup", KeyUpHandler, false);
+    
     var slimeX = 100; var slimeY = 300;
     var slimeW = 50;  var slimeH = slimeW;
+    var slimeSpd = 7;
+    var right = false; var left = false;
 
-    
     var img = new Image();
     img.src = "./m2.png";
+
+    var flag = false;
+
     img.onload = function () {
         c.drawImage(img, 100, 300, 50, 50);
     }
@@ -76,11 +82,23 @@
         } else if (e.keyCode == 37||e.keyCode == 65) {
             left = false;
         }
-    }    
+    }  
+    function drawSlime() {
+        img.onload = function () {
+        flag = true;
+        if (flag)
+            c.drawImage(img, slimeX,slimeY, slimeW,slimeH);
+        if (right&& slimeX+slimeSpd < endX)
+            slimeX += slimeSpd;
+        else if (left && slimeSpd<slimeX)
+            slimeX -= slimeSpd;
+        }
+    }
     function draw() {
         c.clearRect(0,0,endX,endY);
-        c.drawImage(img, slimeX,slimeY, slimeW,slimeH);
+        drawSlime();
 
+        console.log(slimeX);
         gridLine();
         requestAnimationFrame(draw);
     } draw();
