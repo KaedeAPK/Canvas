@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>draw test</title>
+    <title>simple slime walk</title>
     <style>
         canvas { background: rgb(94, 94, 94);
                 width: 100%; height: 100%;}
@@ -21,29 +21,27 @@
     var midX = endX/2;
     var midY = endY/2;
 
-    
-    var slimeX = 100; var slimeY = 300;
-    var slimeW = 50;  var slimeH = slimeW;
-
     var img = new Image();
     img.src = "./m2.png";
 
     var flag = false;
+    img.onload = function () {
+        flag = true;
+    }
+    
+    var slimeX = 100; var slimeY = 300;
+    var slimeW = 50;  var slimeH = slimeW;
 
     function draw() {
         c.clearRect(0,0,endX,endY);
-        c.drawImage(img, slimeX,slimeY, slimeW,slimeH);
-            console.log(slimeX);
-            requestAnimationFrame(draw);
-        
+        if (flag) 
+            c.drawImage(img, slimeX,slimeY, slimeW,slimeH);
+        console.log(slimeX);
+        requestAnimationFrame(draw);
         slimeX++;
     } draw();
+
     
-    img.onload = function () {
-        flag = true;
-        if (flag)
-            draw();
-    }
 
 </script>
 </body>
