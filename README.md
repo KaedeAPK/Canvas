@@ -2,10 +2,8 @@
 ## TASKS
 
 * touch event
-* enemy's shoot drawing
-* bullets multi drawing
-* enemy's shoot hit script
-* hit effect animation
+* bullets multi drawing => array
+* hit effect animation, bomb?
 
 
 ## 32bit game with shooting method
@@ -14,4 +12,8 @@
 
 ## Roll Play game
 * 32bit player resource.
+
+## 素材提供
+サイト名：白螺子屋
+アドレス：http://hi79.web.fc2.com/
 
