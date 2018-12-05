@@ -91,10 +91,18 @@
         else if (left && slimeSpd<slimeX)
             slimeX -= slimeSpd;
     }
+    function msg() {
+        c.beginPath();
+        c.fillStyle = '#fff';
+        c.textAlign = "right";
+        c.textBaseline = 'bottom';
+        c.font = endX * .03 +'px serif';
+        c.fillText('素材提供: Rド様',endX,endY);
+    }
     function draw() {
         c.clearRect(0,0,endX,endY);
         drawSlime();
-
+        msg();
         console.log(slimeX);
         gridLine();
         requestAnimationFrame(draw);
