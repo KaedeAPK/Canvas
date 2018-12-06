@@ -36,8 +36,7 @@
             c.lineTo(endX, i*50);
             c.stroke();
         }
-
-        
+        // endX, endY 大きい方÷10だけ線を引く
         for (i = 0; i < (Math.max(endX,endY)); i ++) {
             // 10で割り切れるときに実行, 500pxごと
             if (i % 10 == 0){
@@ -53,16 +52,8 @@
                 strokeGrid();
             }
         }
-    }
-    gridLine();
-  
-    function drawCircle(x, y, r, color) {
-        c.beginPath();
-        c.arc(x, y, r, 0, 2*Math.PI, false);
-        c.fillStyle = color;
-        c.fill();
-    }
-//drawCircle(midX,midY,midY*.2,'#bb0');
+    } gridLine();
+
 </script>
 </body>
 </html>
