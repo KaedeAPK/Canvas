@@ -32,7 +32,7 @@
     var right = false; var left = false;
 
     var img = new Image();
-    img.src = "./m2.png";
+    img.src = "./m2 ver2.png";
 
     var flag = false;
 
@@ -66,7 +66,8 @@
                 strokeGrid();
             }
         }
-    } gridLine();
+    } 
+    //gridLine();
 
 
     function KeyDownHandler(e) {
@@ -104,7 +105,7 @@
         drawSlime();
         msg();
         console.log(slimeX);
-        gridLine();
+        //gridLine();
         requestAnimationFrame(draw);
     } draw();
 
