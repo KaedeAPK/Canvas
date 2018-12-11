@@ -47,10 +47,10 @@
         var pSpd = 12; var eSpd = 10;
         var bSpd = 48; var eBSpd = 12;
         
-        const maxEHP = 100; var maxPHP = 25;
+        const maxEHP = 200; const maxPHP = 50;
         var eHP = maxEHP; var pHP = maxPHP;
-        var EHPPer = maxEHP/eHP;
-        var PHPPer = maxPHP/pHP;
+        var EHPPer;
+        var PHPPer;
 
         var point = 0; var gameEnd = false;
         
@@ -137,8 +137,8 @@
             hit();
             decision();
             
-            console.log("PHP " + pHP);            
-            console.log('2: ' + eHP);
+            console.log("1 " + PHPPer);            
+            console.log('2: ' + maxEHP);
 
             requestAnimationFrame(draw);
         } draw();
@@ -171,16 +171,18 @@
         
         }
         function drawHPBar() {
+            PHPPer = pHP/maxPHP*100;
+            EHPPer = eHP/maxEHP*100;
             c.beginPath();
             c.lineWidth = 1.5;
             c.strokeStyle = '#fff';
             c.fillStyle = '#f55'
-            c.fillRect(eX,eY*1.01,eW/100*eHP,eW/4);
+            c.fillRect(eX,eY*1.01,eW/100*EHPPer,eW/4);
             c.strokeRect(eX,eY*1.01,eW,eW/4);
             
 
             c.fillStyle = '#04f';
-            c.fillRect(pX*1.02,pY*1.01,pW/100*pHP*4,pW/4);
+            c.fillRect(pX*1.02,pY*1.01,pW/100*PHPPer,pW/4);
             c.strokeRect(pX*1.02,pY*1.01,pW,pW/4);
             c.fill(); c.stroke();
             c.closePath();
@@ -190,14 +192,14 @@
             if (eHP < 0) {
                 c.fillStyle = 'lightblue';
                 c.fillText("CLEAR!",midX,midY,600);
-                c.fillText("Please reload.",midX,midY*1.5,600);
+                c.fillText("Please reload browser.",midX,midY*1.5,600);
                 c.fillStyle = '#04f'
-                c.fillText("Score: "+ (pHP*4),midX,midY*1.3,600);
+                c.fillText("Score: "+ (PHPPer),midX,midY*1.3,600);
                 gameEnd = true;
             } else if (pHP < 0) {
                 c.fillStyle = '#f22';
                 c.fillText("YOU DEAD!",midX,midY,600);
-                c.fillText("Please reload.",midX,midY*1.5,600);
+                c.fillText("Please reload browser",midX,midY*1.5,600);
                 gameEnd = true;
             }
             if (gameEnd) {
