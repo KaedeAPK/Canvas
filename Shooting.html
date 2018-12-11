@@ -49,8 +49,8 @@
         
         const maxEHP = 100; var maxPHP = 25;
         var eHP = maxEHP; var pHP = maxPHP;
-        var restEHP = maxEHP/eHP;
-        var restPHP = maxPHP/pHP;
+        var EHPPer = maxEHP/eHP;
+        var PHPPer = maxPHP/pHP;
 
         var point = 0; var gameEnd = false;
         
@@ -137,8 +137,8 @@
             hit();
             decision();
             
-            console.log("endX: " + endX);            
-            console.log('endY: ' + endY);
+            console.log("PHP " + pHP);            
+            console.log('2: ' + eHP);
 
             requestAnimationFrame(draw);
         } draw();
@@ -215,13 +215,13 @@
                 // enemy's bul with Player
                 if (pX-pW < eBX+eBW && eBX-eBW < pX + pW&&
                     pY < eBY+eBW && eBY-eBW < pY+pH)
-                    pHP -= 1;
+                    pHP -= 1/2;
                 if (pX-pW < eBX2+eBW&& eBX2-eBW < pX + pW&&
                     pY < eBY+eBW && eBY-eBW < pY+pH)
-                    pHP -= 1;
+                    pHP -= 1/2;
                 if (pX-pW < eBX3+eBW&& eBX3-eBW < pX + pW&&
                     pY < eBY+eBW && eBY-eBW < pY+pH)
-                    pHP -= 1;
+                    pHP -= 1/2;
             }
         }
         
