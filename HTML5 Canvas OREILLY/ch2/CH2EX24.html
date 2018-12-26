@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ChEx24 Simple radial Gradients #3 -Arc stroke</title>
+<script src="modernizr-2.0.6.js"></script>
+<script type="text/javascript">
+window.addEventListener('load', eventWindowLoaded, false);
+function eventWindowLoaded() {
+
+	canvasApp();
+
+}
+
+function canvasSupport () {
+	return Modernizr.canvas;
+}
+
+function canvasApp(){
+
+	if (!canvasSupport()) {
+		return;
+	}else{
+		var theCanvas = document.getElementById('canvas');
+		var context = theCanvas.getContext('2d');
+	}
+
+	drawScreen();
+
+	function drawScreen() {
+
+		var gr = context.createRadialGradient(50,50,25,100,100,100);
+
+		// Add the color stops.
+
+		gr.addColorStop(0,'rgb(255,0,0)');
+		gr.addColorStop(.5,'rgb(0,255,0)');
+		gr.addColorStop(1,'rgb(255,0,0)');
+
+		// Use the gradient for the strokeStyle.
+		context.strokeStyle = gr;
+		context.arc(100, 100, 50, (Math.PI/180)*0, (Math.PI/180)*360, false);
+		context.stroke();
+
+	}
+
+}
+
+
+</script> 
+</head>
+<body>
+<div style="position: absolute; top: 50px; left: 50px;">
+	<canvas id="canvas" width="500" height="500">
+	Your browser does not support the HTML 5 Canvas.
+	</canvas>
+</div>
+</body>
+</html>
