@@ -32,4 +32,4 @@ function render() {
         else
             planeX -= dx;
         console.log(planeX);
- } render();
+} render();
