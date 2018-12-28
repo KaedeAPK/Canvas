@@ -18,32 +18,11 @@ myShips.onload = function() {
 
 function render() {
     c.clearRect(0,0,endX,endY);
-
-    if (flag)        
-        c.drawImage(myShips, 0,0,32,32,midX,midY,64,64);
-        c.drawImage(myShips, 32,0,32,32,midX,midY+64,64,64);
-        c.drawImage(myShips, 64,0,32,32,midX,midY+128,64,64);
-        c.drawImage(myShips, 96,0,32,32,midX,midY+192,64,64);
-        
+    for (i = 0; i<8; i++) {
+        if (flag)        
+        c.drawImage(myShips, i*32,0,32,32,midX,100+(i*64),64,64);
+    }
         requestAnimationFrame(render);
 } render();
 
-// ---- sample code ----
-
-// var ships=new Image();
-// ships.addEventListener('load', eventShipLoaded, false);
-// ships.src="ships.png";
-
-// function eventShipLoaded() {
-//     drawScreen();
-// }
-
-// function drawScreen() {
-
-//     //draw a background so we can wee the Canvas edges
-//     c.fillStyle="#aaaaaa";
-//     c.fillRect(0,0,500,500);
-//     c.drawImage(ships, 32, 0, 32, 32, 50, 50, 64, 64);
-
-// }
 
