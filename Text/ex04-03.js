@@ -6,23 +6,29 @@ const endY = cvs.height= window.innerHeight;
 const midX = cvs.width /2;
 const midY = cvs.height /2;
 
+var imgW;
+
 const myShips = new Image();
 myShips.src = './ships.png';
 
 var flag = false;
 myShips.onload = function() {
     flag = true;
+    imgW = myShips.naturalWidth;
 };       
 
 // c.drawImage(var of image, sx, sy, sw, sh, x, y, width , height)
 
 function render() {
+    const px = 32; const size = 64;
     c.clearRect(0,0,endX,endY);
-    for (i = 0; i<8; i++) {
+    for (i = 0; i<imgW/px; i++) {
         if (flag)        
-        c.drawImage(myShips, i*32,0,32,32,midX,100+(i*64),64,64);
+        c.drawImage(myShips, i*px,0,px,px,
+            midX,100+(i*size),size,size);
     }
         requestAnimationFrame(render);
 } render();
 
 
+     
