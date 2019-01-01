@@ -20,11 +20,7 @@ tile.onload = function() {
 };       
 
 var counter = 1;
-
 var tileIndex = 1; //0-7
-
-
-
 
 // c.drawImage(var of image, sx, sy, sw, sh, 
 //  x, y, width , height)
@@ -35,22 +31,14 @@ function render() {
     // 2 % 8: 2 x32
     // 9 % 8: 1 x 32
     
-    var sx = (tileIndex+1)%8*px;
-  
-
-
-    // tileNum[0],つまり1 を8で割ったものの整数x32
-    //           sx,sy: 32 0
-// ex04-05.js:41 sx,sy: 64 0
-// ex04-05.js:41 sx,sy: 96 0
-// ex04-05.js:41 sx,sy: 128 0
-// ex04-05.js:41 sx,sy: 160 0
-// ex04-05.js:41 sx,sy: 192 0
+    var sx = (tileIndex)%8*px;
+    
 // ex04-05.js:41 sx,sy: 224 0
 // ex04-05.js:41 sx,sy: 0 32
 // ex04-05.js:41 sx,sy: 32 0
 
-    var sy = Math.floor(tileNum[tileIndex]/8)*px;
+    // tileIndex: loop 1,2...8,1,2
+    var sy = Math.floor(tileIndex/8)*px;
     console.log('sx,sy:',sx,sy);
 
     c.clearRect(0,0,endX,endY);
@@ -59,11 +47,8 @@ function render() {
             midX,100+(size),size,size);
                 
         tileIndex++;
-        if (tileNum.length == tileIndex)
-            tileIndex = 0;// 0-7 -> 1-8
+        if (9 == tileIndex)
+            tileIndex = 1;// 1->8
             
         requestAnimationFrame(render); // 1000/30fps 
 } render();
-
-
-     

@@ -20,7 +20,6 @@ tile.onload = function() {
 };
 
 var counter = 1;
-
 var tileIndex = 1;
 
 // c.drawImage(var of image, sx, sy, sw, sh,
@@ -41,13 +40,10 @@ function render() {
     console.log('sx,sy:',sx,sy);
 
     c.clearRect(0,0,endX,endY);
-        if (flag)
-        c.drawImage(tile, sx,sy,px,px,
-            midX,100+(size),size,size);
-
-        tileIndex++;
-        if (9 == tileIndex)
-            tileIndex = 1;// 0-7 -> 1-8
+    if (flag) 
+    c.drawImage(tile, sx + 1, sy + 1, px, px - 1, 
+        midX,100+size, size, size);
+    tileIndex = tileIndex % 8 + 1;
 
         requestAnimationFrame(render); // 1000/30fps
 } render();

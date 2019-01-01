@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>img basic</title>
+    <style>
+        * {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+const cvs = document.querySelector('canvas');
+const c = cvs.getContext('2d');
+const endX = cvs.width = window.innerWidth;
+const endY = cvs.height= window.innerHeight;
+const midX = cvs.width /2;
+const midY = cvs.height /2;
+const px = 32; const size = 64;
+
+const tile = new Image();
+tile.src = './pic/tanks_sheet.png';
+
+var flag = false;
+tile.onload = function() {
+    flag = true;
+
+};       
+
+var animationFrames = [1,2,3,4,5,6,7,8];
+var frameIndex = 0;
+var dx = 0; var dy = -1;
+var x = midX; var y = endY;
+
+function render() {
+    x += dx;
+    y += dy;
+    // I don't know why array is used.
+    var nowFrame = animationFrames[frameIndex]
+    var sx = (nowFrame %8)*px;
+    var sy = Math.floor(nowFrame/8)*px;
+
+    c.clearRect(0,0,endX,endY);
+        if (flag)
+        c.drawImage(tile, sx,sy,px,px,
+            x,y,size,size);
+        frameIndex++;
+        if (animationFrames.length == frameIndex)
+            frameIndex = 0;// 0-7
+
+        requestAnimationFrame(render); // 1000/30fps 
+} render();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
