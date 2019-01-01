@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tank rolling</title>
+    <style>
+        * {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+
+// by chap04.html
+const cvs = document.querySelector('canvas');
+const c = cvs.getContext('2d');
+const endX = cvs.width = window.innerWidth;
+const endY = cvs.height= window.innerHeight;
+const midX = cvs.width /2;
+const midY = cvs.height /2;
+
+const px = 32; const size = 64;
+
+const tank01 = new Image();
+tank01.src = './tankParts/tank01.png';
+const tank02 = new Image();
+tank02.src = './tankParts/tank02.png';
+const tank03 = new Image();
+tank03.src = './tankParts/tank03.png';
+const tank04 = new Image();
+tank04.src = './tankParts/tank04.png';
+const tank05 = new Image();
+tank05.src = './tankParts/tank05.png';
+const tank06 = new Image();
+tank06.src = './tankParts/tank06.png';
+const tank07 = new Image();
+tank07.src = './tankParts/tank07.png';
+const tank08 = new Image();
+tank08.src = './tankParts/tank08.png';
+
+const tanks = [
+    tank01,tank02,tank03,tank04,
+    tank05,tank06,tank07,tank08,
+];
+
+
+var flag = false;
+tank01.onload = function() {
+    flag = true;
+};       
+
+// var counter = 1;
+var a = 0; //0-7
+
+function render() {
+    
+    console.log(tanks[a]); 
+    tank00 = tanks[a];
+    c.clearRect(0,0,endX,endY);
+        if (flag)
+        c.drawImage(tank00,midX,midY,size,size);
+        a++;
+        a = a % 8;
+            
+        requestAnimationFrame(render); // 1000/30fps 
+} render();
+
+
+    </script>
+</body>
+</html>
