@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>img basic07</title>
+    <style>
+        * {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+const cvs = document.querySelector('canvas');
+const c = cvs.getContext('2d');
+const endX = cvs.width = window.innerWidth;
+const endY = cvs.height= window.innerHeight;
+const midX = cvs.width /2;
+const midY = cvs.height /2;
+
+function drawArc(x, y, r, color) {
+    c.beginPath();
+    c.arc(x, y, r, 0, 2*Math.PI, false);
+    c.fillStyle = color;
+    c.fill();
+}
+
+var scaleX = 1; var scaleY = 1.00
+var count = 0;
+
+function render() {
+    // お餅をループさせたかった2019！！
+    c.clearRect(0,0,endX,endY);
+    c.beginPath();
+    c.scale(scaleX,scaleY);
+    drawArc(midX,0,20,'#fff');
+    c.closePath();
+    if (1000<count ) {
+        c.scale(1,1); 
+        scaleY= 1;
+        count = 0;
+    }
+    else
+        scaleY += 0.00001;
+    console.log(scaleY,count);
+    count++;
+
+    requestAnimationFrame(render); // 1000/30fps 
+} render();
+    </script>
+</body>
+</html>
