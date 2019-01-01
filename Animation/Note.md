@@ -2,18 +2,15 @@
 # Canvas Anime Note
 
 ## Task
+* loop, scale,rotate: Done!
 
-### Scaling
-* Make 1 sample
-
-### Spinnig
-* Add 2 Fig Spinnig other direction
+## Mulipie Moves
 
 ### Moving
 * Add None Stop Colorful Carten
 
 ### Season
-* Make SunRaise and Sunset Anime
+* Make SunRaise and Sunset Anime => later
 
 ## Transformation
     // x, y => 追加移動座標
@@ -23,7 +20,7 @@
 
 ## Expand from center
     // 必要であれば初期化
-    c.setTransform(1,0,0,1,0,0;)
+    c.setTransform(1,0,0,1,0,0);
     c.scale(2,2);
     c.translate(x + 0.5 * w , y + 0.5 * h);
     // これで図形が拡大される。

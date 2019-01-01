@@ -31,43 +31,25 @@ tile.onload = function() {
 
 var animationFrames = [1,2,3,4,5,6,7,8];
 var frameIndex = 0;
-var dx = 0; var dy = -1;
-var x = midX; var y = endY;
+
+var x = midX; var y = midY;
+var rtt = 90;
 
 function render() {
-    x += dx;
-    y += dy;
     // I don't know why array is used.
     var nowFrame = animationFrames[frameIndex]
     var sx = (nowFrame %8)*px;
     var sy = Math.floor(nowFrame/8)*px;
+    
 
-    c.clearRect(0,0,endX,endY);
-        if (flag)
-        c.drawImage(tile, sx,sy,px,px,
-            x,y,size,size);
-        frameIndex++;
-        if (animationFrames.length == frameIndex)
-            frameIndex = 0;// 0-7
+    if (flag) {
+    // c.drawImage(tile,0,0);
+    c.drawImage(tile, sx+1,sy,px,px,
+        midX,midY,size,size);
+    }
 
-        requestAnimationFrame(render); // 1000/30fps 
+    requestAnimationFrame(render); // 1000/30fps 
 } render();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     </script>
