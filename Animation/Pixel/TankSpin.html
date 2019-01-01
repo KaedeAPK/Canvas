@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>img basic07</title>
+    <style>
+        * {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+const cvs = document.querySelector('canvas');
+const c = cvs.getContext('2d');
+const endX = cvs.width = window.innerWidth;
+const endY = cvs.height= window.innerHeight;
+const midX = cvs.width /2;
+const midY = cvs.height /2;
+const px = 32; const size = 128;
+
+const tile = new Image();
+tile.src = 'tanks_sheet.png';
+
+var flag = false;
+tile.onload = function() {
+    flag = true;
+
+};       
+
+var animationFrames = [1,2,3,4,5,6,7,8];
+var frameIndex = 0;
+
+var x = midX; var y = midY;
+var rtt = 90;
+
+function render() {
+    // I don't know why array is used.
+    var nowFrame = animationFrames[frameIndex]
+    var sx = (nowFrame %8)*px;
+    var sy = Math.floor(nowFrame/8)*px;
+    c.beginPath();
+    c.save();
+    c.setTransform(1,0,0,1,0,0);
+
+    c.translate(x,y);
+    var angle = rtt * Math.PI/180;
+    c.rotate(angle);
+    c.clearRect(-endX,-endY,endX*2,endY*2);
+    if (flag)
+    c.drawImage(tile, sx+1,sy,px,px,
+        -size/2,-size/2,size,size);
+    c.restore();
+    rtt++;
+    c.closePath();
+
+    requestAnimationFrame(render); // 1000/30fps 
+} render();
+
+
+    </script>
+</body>
+</html>

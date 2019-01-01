@@ -1,5 +1,8 @@
 # Chap04 Techs
 
+## Next
+* edit tileMap
+
 ## Temp, これで画像が読み込める
 
     const img = new Image();
