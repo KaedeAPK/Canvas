@@ -36,8 +36,8 @@ function render() {
     
 
     var sy = Math.floor((tileIndex)/8)*px;
-    // 1-7: を0に
-    // 8: の時だけ1に
+    // 1-7:    を0に: 7/8
+    // 8: の時だけ1に:
     console.log('sx,sy:',sx,sy);
 
     c.clearRect(0,0,endX,endY);
