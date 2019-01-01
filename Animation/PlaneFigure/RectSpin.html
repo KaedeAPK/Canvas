@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spin Rectangle</title>
+    <style>
+        canvas {
+            background: rgb(94, 94, 94);
+            width: 100%; height: 100%;
+        }
+        body {margin: 0;}
+    </style>
+
+</head>
+<body>
+    <canvas></canvas>
+<script>
+    var canvas = document.querySelector('canvas');
+    var cW = canvas.width = window.innerWidth;
+    var cH = canvas.height = window.innerHeight;
+    var c = canvas.getContext('2d');
+    var a = 45;
+function render() {
+    var angle = a * Math.PI/180;
+    var x = cW/2; var y = cH/4;
+    var w = 100; var h = 200;
+
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.clearRect(0,0,canvas.width,canvas.height);
+
+    c.translate(x + w/2, y + h/2);
+    //c.scale(4,4);
+    c.rotate(angle);
+    c.fillStyle = 'red';
+    c.fillRect(w/-2, h/-2, w, h);
+    a += 0.5;
+    console.log(angle);
+    window.requestAnimationFrame(render);
+    }
+
+    window.requestAnimationFrame(render);
+    
+
+
+</script>
+</body>
+</html>

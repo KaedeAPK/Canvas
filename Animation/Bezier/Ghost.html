@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HalloWeen Ghost</title>
+    <style>
+        canvas { background: #000;
+                width: 100%; height: 100%;}
+        body {margin: 0;}
+    </style>
+
+</head>
+<body>
+    <canvas></canvas>
+<script>
+    // Background: glay by CSS
+    // This is Canvas Grid Line for drawing
+
+    // Lightgreen by every 500px line
+    // white line by 100px line
+    // glay by 50px.
+    var canvas = document.querySelector('canvas');
+    var cW = canvas.width = window.innerWidth;
+    var cH = canvas.height = window.innerHeight;
+    var c = canvas.getContext('2d');
+    
+    function CenterLine() { 
+        c.lineWidth = 1;
+        c.moveTo(0,cH*.5);
+        c.lineTo(cW,cH*.5);
+        c.moveTo(cW*.5,0);
+        c.lineTo(cW*.5,cH);
+        c.stroke();
+        }
+
+ 
+    var gX = cW*.40;
+    var gY = cH*.60;
+    var gXE = cW*.60;
+    var gYE = cH*.60;
+
+    var gPX = cW/2;
+    var gPY = 0;
+
+    var gW = gXE - gX;
+
+    var gF = cH*0.04;
+
+    var spd = 1.5;
+    
+    function drawGhost() {
+        c.lineWidth = 20;
+        c.strokeStyle = '#fff';
+        c.lineJoin = "round";
+        c.lineCap = 'round';
+        c.moveTo(gX, gY);
+        c.quadraticCurveTo(gPX,gPY, gXE,gYE);
+        c.stroke();
+        c.moveTo(gX,gY);
+        c.lineTo(gX+(gW/6),gY-gF);
+        c.lineTo(gX+(gW/6)*2,gY);
+        c.lineTo(gX+(gW/6)*3,gY-gF);
+        c.lineTo(gX+(gW/6)*4,gY);
+        c.lineTo(gX+(gW/6)*5,gY-gF);
+        c.lineTo(gXE,gYE);
+        c.stroke();
+    }
+    function drawEye() {
+        c.fillStyle = '#fff'
+        c.moveTo(rEyeX,EyeY);
+        c.arc(rEyeX,EyeY,gW*.02, 0,9,false);
+        c.moveTo(lEyeX,EyeY);
+        c.arc(lEyeX,EyeY,gW*.02, 0,10,false);
+        c.stroke();
+    }
+    var rEyeX = cW*.5 + gW/8;
+    var EyeY = cH*.5 - gW/4;
+
+    var lEyeX = cW*.5 - gW/8;
+
+    function mover() {
+        gX+= spd;
+        gY+= spd;
+        gXE+= spd;
+        gYE+= spd;
+
+        gPX+= spd;
+        gPY+= spd;
+
+        rEyeX+= spd;
+        lEyeX+= spd;
+        EyeY+= spd;
+        if (cH<gY*.8) {
+            spd *= -1;
+        } else if (gY < 0) {
+            spd *= -1;
+        }
+    }
+    
+    function draw() {
+        c.clearRect(0,0,cW,cH);
+        c.beginPath();
+        drawGhost();
+        drawEye();
+        mover();
+        drawMessage();
+        //CenterLine();
+        console.log('gX:'+gX);
+        console.log('gY:'+gY);
+        // console.log('gXE,  gYE:'+gXE,gYE);
+        // console.log('cW:  '+ cW);
+        // console.log('gW: '+ gW);
+        // console.log('gPY:'+ gPY);
+        console.log('rEyeX:'+rEyeX);
+        requestAnimationFrame(draw);
+    } 
+    draw();
+
+    function drawMessage() {
+        c.beginPath();
+        c.fillStyle = '#fff';
+        c.textAlign = "center";
+        c.font = '75px serif';
+        c.fillText('🎃Happy Halloween!!!🎃',cW/2,cH*.1);
+    } drawMessage;
+
+    
+
+
+    </script>
+</body>
+</html>

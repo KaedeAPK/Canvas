@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Friction</title>
+    <style>
+        canvas { background: rgb(94, 94, 94);
+                width: 100%; height: 100%;}
+        body {margin: 0;}
+    </style>
+
+</head>
+<body>
+    <canvas></canvas>
+<script>
+    var canvas = document.querySelector('canvas');
+    var cW = canvas.width = window.innerWidth;
+    var cH = canvas.height = window.innerHeight;
+    var c = canvas.getContext('2d');
+    // Slows down slowly.
+    function drawCircle(x, y, r, color) {
+        c.beginPath();
+        c.arc(x, y, r, 0, 2*Math.PI, false);
+        c.fillStyle = color;
+        c.fill();
+    }
+    var spd = 80;
+    var x = 0; var y = cH/2;
+    var r = 20;
+
+    function loop() {
+        requestAnimationFrame(loop);
+        c.clearRect(0,0,cW,cH);
+        drawCircle(x,y,r,'#f9f');
+        // 目標地点への摩擦原則モデル
+        // x 座標 += (目標地点 – x) / 速度の遅さ
+        x += (cW*.9 - x) / spd;
+        gridLine();
+    } loop();
+
+    function gridLine() {
+        c.lineWidth = 1;
+        function strokeGrid() {
+            c.beginPath();
+            c.moveTo(i*50, 0);
+            c.lineTo(i*50, 1000);
+            c.moveTo(0, i*50);
+            c.lineTo(2000, i*50);
+            c.stroke();
+        }
+
+        // ver.2: funcを中に入れてcodeを短くする
+        for (i = 0; i < 500; i ++) {
+            // 0から50ごとに2500まで実行, 500回.
+            if (i % 10 == 0){
+                c.strokeStyle = '#90ee90';
+                strokeGrid();
+            }
+            else if (i % 2 == 1){
+                c.strokeStyle = '#999';
+                strokeGrid();
+            }
+            else if (i % 2 == 0) {
+                c.strokeStyle = '#fff';
+                strokeGrid();
+            }
+        }
+    }
+    gridLine();
+
+   
+    console.log(x,y,r);
+
+
+</script>
+</body>
+</html>
