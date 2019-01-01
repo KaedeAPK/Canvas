@@ -19,35 +19,39 @@ const endY = cvs.height= window.innerHeight;
 const midX = cvs.width /2;
 const midY = cvs.height /2;
 
-function drawArc(x, y, r, color) {
-    c.beginPath();
-    c.arc(x, y, r, 0, 2*Math.PI, false);
-    c.fillStyle = color;
-    c.fill();
-}
 
-var scaleX = 1; var scaleY = 1.00
-var count = 0;
-var x = midX; var y = midY; var r = 20;
+
+var x = midX; var y = midY;
+var w = 300; var h = 150;
+var a = 0;
 
 function render() {
-    // 真ん中から拡大する, save()and restore()
+    
+    var angle = a * Math.PI/180;
     c.clearRect(-endX,-endY,endX*2,endY*2);
     // clearするvalureを0,0よりも左上から2倍の範囲でクリアすることで解決
     c.beginPath();
     c.setTransform(1,0,0,1,0,0);
-    c.translate(x,y)
-    c.scale(scaleX,scaleY);
-    drawArc(0,0,20,'#fff');
+    c.translate(x, y)
+    c.rotate(angle)
+    c.fillStyle = '#fff';
+    c.fillRect(0,0, w,h);
+    
+    c.fillStyle='#f00';
+    c.fillRect(0,midY/2,midY/4,midY/4);
+
+    c.fillStyle='#9f9';
+    c.fillRect(midX/2,0,midY/4,midY/4);
+
+    c.fillStyle='#555';
+    c.fillRect(midX/2,midY/2,w,midY/4);
     
     
-    
+    // Canvasが真ん中から回っているのがよくわかる
     c.closePath();
-    scaleX += 0.1;
-    scaleY += 0.1;
-    if (40 < scaleX)
-        scaleX = scaleY = 1;
-    console.log(scaleX,scaleY);
+    a++;
+    // console.log('a: ',a, 'angle: ', angle);
+    console.log('-midx',-midX);
     requestAnimationFrame(render); // 1000/30fps 
 } render();
     </script>
