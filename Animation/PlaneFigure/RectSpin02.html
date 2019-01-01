@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RectSpin</title>
+    <style>
+        * {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+const cvs = document.querySelector('canvas');
+const c = cvs.getContext('2d');
+const endX = cvs.width = window.innerWidth;
+const endY = cvs.height= window.innerHeight;
+const midX = cvs.width /2;
+const midY = cvs.height /2;
+
+
+
+var x = midX; var y = midY;
+var w = midX; var h = 300;
+var a = 0;
+
+function render() {
+    
+    var angle = a * Math.PI/180;
+    c.clearRect(-endX,-endY,endX*2,endY*2);
+    // clearするvalureを0,0よりも左上から2倍の範囲でクリアすることで解決
+    c.beginPath();
+    c.setTransform(1,0,0,1,0,0);
+    c.translate(x, y)
+    c.rotate(angle)
+    c.fillStyle = '#a0e0ff';
+    // width, heightの分だけ左上からスタート
+    c.fillRect(-w/2,-h/2, w,h);
+    
+    c.closePath();
+    a++;
+    // console.log('a: ',a, 'angle: ', angle);
+    console.log('midx',midX);
+    requestAnimationFrame(render); // 1000/30fps 
+} render();
+    </script>
+</body>
+</html>
