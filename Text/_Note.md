@@ -38,5 +38,10 @@ if (11 < counter)// ex(3,5),(13,29),(5,10)
 
 ```
 var sy = Math.floor((tileIndex)/8)*px;
+
+tileIndex++;
+if (9 == tileIndex)
+    tileIndex = 1;// 0-7 -> 1-8
 ```
+* このコードでtileIndexが8の時だけy座標が1になる
 
