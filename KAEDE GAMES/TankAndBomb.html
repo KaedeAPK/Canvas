@@ -56,6 +56,10 @@ const tanks = [
 const bombs = [
     bomb01,bomb02,bomb03
 ];
+document.addEventListener("keydown", KeyDownHandler, false);
+document.addEventListener("keyup", KeyUpHandler, false);
+var right = false; var left = false;
+
 
 
 var flag = false;
@@ -75,13 +79,21 @@ function render() {
         drawTank();
     destroyed();
     stageLine();
-    // console.log(tanks[a],bombs[b]); 
-} render();
 
+} render();
+tankX = midX; tankY = midY+2*size;
 function drawTank() {
     tank00 = tanks[a]; 
-    c.drawImage(tank00,midX,midY,size,size);
+    
+    c.drawImage(tank00,tankX,tankY,size,size);
     a++; a = a % 8; // 0~7
+    if (right&& tankX < midX+2*size)
+        tankX += size;
+    else if (left && midX-3*size <tankX)
+        tankX -= size;
+    console.log('tankX,Y:',tankX,tankY);
+    console.log('L,R:',left,right);
+    
 }
 function destroyed() {
     bomb00 = bombs[b];
@@ -106,14 +118,26 @@ function drawFloor() {
     for (row = 0; row < 6; row++) {
         for (column = 0; column < 6; column++)
         c.drawImage(floor,x+row*size,y+column*size,size,size);
-        console.log('x,y:',x,y);
+    }
+}
+
+function KeyDownHandler(e) {
+    if(e.keyCode == 39||e.keyCode == 68) { 
+        right = true;
+    } else if(e.keyCode == 37||e.keyCode == 65) {
+        left = true;
+    }
+}
+function KeyUpHandler(e) {
+    if (e.keyCode == 39||e.keyCode == 68) {
+        right = false;
+    } else if (e.keyCode == 37||e.keyCode == 65) {
+        left = false;
     }
 }
 
 
-
 setInterval(render,100);
-
 
     </script>
 </body>
