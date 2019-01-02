@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ScaleUp loop</title>
+    <style>
+        * {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+const cvs = document.querySelector('canvas');
+const c = cvs.getContext('2d');
+const endX = cvs.width = window.innerWidth;
+const endY = cvs.height= window.innerHeight;
+const midX = cvs.width /2;
+const midY = cvs.height /2;
+
+function drawArc(x, y, r, color) {
+    c.beginPath();
+    c.arc(x, y, r, 0, 2*Math.PI, false);
+    c.fillStyle = color;
+    c.fill();
+}
+
+var scaleX = 1; var scaleY = 1.00
+var count = 0;
+var x = midX; var y = midY; var r = 20;
+
+function render() {
+    // 真ん中から拡大する, save()and restore()
+    c.clearRect(-endX,-endY,endX*2,endY*2);
+    // clearするvalureを0,0よりも左上から2倍の範囲でクリアすることで解決
+    c.beginPath();
+    c.setTransform(1,0,0,1,0,0);
+    c.translate(x,y)
+    c.scale(scaleX,scaleY);
+    // 16No. r,g,b,alpha
+    drawArc(0,-20,20,'#f008');
+    drawArc(25,20,20,'#0f08');
+    drawArc(-25,20,20,'#00f8');
+
+    
+    
+    c.closePath();
+    scaleX += 0.1;
+    scaleY += 0.1;
+    if (40 < scaleX)
+        scaleX = scaleY = 1;
+    console.log(scaleX,scaleY);
+    requestAnimationFrame(render); // 1000/30fps 
+} render();
+    </script>
+</body>
+</html>
