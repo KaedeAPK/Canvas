@@ -40,9 +40,19 @@ tank07.src = './tankParts/tank07.png';
 const tank08 = new Image();
 tank08.src = './tankParts/tank08.png';
 
+const bomb01 = new Image();
+bomb01.src = './tankParts/bomb01.png';
+const bomb02 = new Image();
+bomb02.src = './tankParts/bomb02.png';
+const bomb03 = new Image();
+bomb03.src = './tankParts/bomb03.png';
+
 const tanks = [
     tank01,tank02,tank03,tank04,
     tank05,tank06,tank07,tank08,
+];
+const bombs = [
+    bomb01,bomb02,bomb03
 ];
 
 
@@ -53,19 +63,30 @@ tank01.onload = function() {
 
 // var counter = 1;
 var a = 0; //0-7
+var b = 0;
 
 function render() {
     
-    console.log(tanks[a]); 
-    tank00 = tanks[a];
+    console.log(tanks[a],bombs[b]); 
+    tank00 = tanks[a]; bomb00 = bombs[b];
     c.clearRect(0,0,endX,endY);
-        if (flag)
-        c.drawImage(tank00,midX,midY,size,size);
-        a++;
-        a = a % 8;
-            
-        requestAnimationFrame(render); // 1000/30fps 
+    if (flag)
+        drawTank();
+    destroyed();
 } render();
+
+function drawTank() {
+    c.drawImage(tank00,midX,midY,size,size);
+    a++; a = a % 8; // 0~7
+}
+function destroyed() {
+    c.drawImage(bomb00,midX,midY-size*2,size,size);
+    b++; b = b % 3; // 0~2
+}
+
+
+
+setInterval(render,100);
 
 
     </script>
