@@ -10,7 +10,7 @@
 1. Separate Sheets
 2. Make Bomb Effect by sheets
 3. Spin, save() & restore() study
-* 回転覚える！
+4. Make Line of Stage.
 
 ## Roll Play game
 * 白螺子屋様の画像を切り抜いて名付けする
