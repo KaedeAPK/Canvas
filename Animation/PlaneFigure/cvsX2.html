@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas X 4</title>
+    <style>
+        * {
+            background: #000;
+        }
+      
+    </style>
+</head>
+<body>
+    <canvas id = 'cvs1'></canvas>
+    <canvas id = 'cvs2'></canvas>
+    <canvas id = 'cvs3'></canvas>
+    <canvas id = 'cvs4'></canvas>
+    
+    <script> // Dont move =============================
+
+
+const cvs1 = document.getElementById('cvs1');
+const c1 = cvs1.getContext('2d'); // Null.
+const cvs2 = document.getElementById('cvs2');
+const c2 = cvs2.getContext('2d'); // Null.
+const cvs3 = document.getElementById('cvs3');
+const c3 = cvs3.getContext('2d'); // Null.
+
+const endX = window.innerWidth;
+const endY = window.innerHeight;
+const midX =  window.innerWidth/2;
+const midY =  window.innerHeight/2;
+
+
+
+function render() {
+
+    c1.clearRect(0,0,endX,endY);
+    c1.fillStyle ='#f00'; 
+    c1.fillRect(0,0,midX,midY);
+
+    c2.fillStyle ='#ff0'; 
+    c2.fillRect(0,0,midX,midY);
+
+    c3.fillStyle ='#f0f'; 
+    c3.fillRect(0,0,midX,midY);
+
+    console.log('midx',midX );
+    
+            
+            
+            
+            
+            
+            
+    requestAnimationFrame(render); // 1000/30fps 
+} render();
+    </script>
+</body>
+</html>
