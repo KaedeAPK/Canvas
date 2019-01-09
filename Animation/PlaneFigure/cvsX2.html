@@ -6,6 +6,7 @@
     <style>
         * {
             background: #000;
+
         }
       
     </style>
@@ -25,35 +26,45 @@ const cvs2 = document.getElementById('cvs2');
 const c2 = cvs2.getContext('2d'); // Null.
 const cvs3 = document.getElementById('cvs3');
 const c3 = cvs3.getContext('2d'); // Null.
+const cvs4 = document.getElementById('cvs4');
+const c4 = cvs4.getContext('2d'); // Null.
 
 const endX = window.innerWidth;
 const endY = window.innerHeight;
 const midX =  window.innerWidth/2;
 const midY =  window.innerHeight/2;
 
+cvs1.width =cvs2.width 
+=cvs3.width=cvs4.width = midX-20;
 
+cvs1.height = cvs2.height 
+= cvs3.height = cvs4.height = midY;
 
 function render() {
 
     c1.clearRect(0,0,endX,endY);
-    c1.fillStyle ='#f00'; 
+    c1.fillStyle ='#f66'; 
     c1.fillRect(0,0,midX,midY);
 
-    c2.fillStyle ='#ff0'; 
+    c2.fillStyle ='#0a0'; 
     c2.fillRect(0,0,midX,midY);
 
-    c3.fillStyle ='#f0f'; 
+    c3.fillStyle ='#0af'; 
     c3.fillRect(0,0,midX,midY);
 
-    console.log('midx',midX );
-    
+    c4.fillStyle ='#bb0'; 
+    c4.fillRect(0,0,midX,midY);
+
+    console.log('cvs1',cvs1);
+    console.log('wid:',cvs1.width);
+    console.log('hei:',cvs1.height);
             
             
             
             
             
             
-    requestAnimationFrame(render); // 1000/30fps 
+    // requestAnimationFrame(render); // 1000/30fps 
 } render();
     </script>
 </body>
