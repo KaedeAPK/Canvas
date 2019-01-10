@@ -10,9 +10,10 @@
     </style>
 </head>
 <body>
-    <canvas></canvas>
-    <script>
+<canvas></canvas>
+<script>
 
+//　いつものCanvasセット
 const cvs = document.querySelector('canvas');
 const c = cvs.getContext('2d');
 const endX = cvs.width = window.innerWidth;
@@ -20,7 +21,9 @@ const endY = cvs.height= window.innerHeight;
 const midX = cvs.width /2;
 const midY = cvs.height /2;
 
+// pxは1タイル32pxでsizeは64pxで描画する。
 const px = 32; const size = 64;
+
 // const delcare, for loop availble?
 const tank01 = new Image();
 tank01.src = './tankParts/tank01.png';
@@ -38,6 +41,10 @@ const tank07 = new Image();
 tank07.src = './tankParts/tank07.png';
 const tank08 = new Image();
 tank08.src = './tankParts/tank08.png';
+// for (i=1; i <= 8; i++) {
+//     const tank0 + i = new Image();
+//     tank0 + i .src = './tankParts/tank0' +i +'.png';
+// }
 
 const bomb01 = new Image();
 bomb01.src = './tankParts/bomb01.png';
@@ -52,6 +59,7 @@ floor.src = './tankParts/floor.png';
 const bullet = new Image();
 bullet.src = './tankParts/bullet.png';
 
+// -------------------------------------
 const tanks = [
     tank01,tank02,tank03,tank04,
     tank05,tank06,tank07,tank08,
@@ -90,7 +98,7 @@ function render() {
 var tankX = midX;var tankY = midY+2*size;
 function drawTank() {
     tank00 = tanks[a]; 
-    
+    // 戦車の絵を8枚ループさせてアニメを作る
     c.drawImage(tank00,tankX,tankY,size,size);
     a++; a = a % 8; // 0~7
     if (right&& tankX < midX+2*size)
@@ -102,7 +110,7 @@ function drawTank() {
     
 }
 function destroyed() {
-    bomb00 = bombs[b];
+    bomb00 = bombs[b]; // bombの絵は3枚。
     c.drawImage(bomb00,midX,midY-size*2,size,size);
     b++; b = b % 3; // 0~2
 }
@@ -118,7 +126,7 @@ function drawBullet(){
 function stageLine() {
     c.beginPath();
     c.strokeStyle='#fff';
-    for (i = -3; i<4; i++) {
+    for (i = -3; i<4; i++) { // -3,-2,-1,0,1,2,3
         c.moveTo(midX+i*size,midY-3*size);
         c.lineTo(midX+i*size,midY+3*size);
         c.moveTo(midX-3*size,midY-i*size);
@@ -143,8 +151,8 @@ function drawGuide() {
     c.fillStyle = '#fff';
     c.font='32px serif';
     c.textAlign = "center";
-    c.fillText('<- D key',leftEnd,top-10);
-    c.fillText('A key ->',rightEnd,top-10);
+    c.fillText('<- A key',leftEnd,top-10);
+    c.fillText('D key ->',rightEnd,top-10);
     c.fillText('Space to shoot',midX,midY+192+size/2);
     
 }

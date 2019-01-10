@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tank rolling</title>
+    <style>
+        * {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+<script>
+
+//　いつものCanvasセット
+const cvs = document.querySelector('canvas');
+const c = cvs.getContext('2d');
+const endX = cvs.width = window.innerWidth;
+const endY = cvs.height= window.innerHeight;
+const midX = cvs.width /2;
+const midY = cvs.height /2;
+c.fillStyle = c.strokeStyle = '#fff';
+
+// pxは1タイル32pxでsizeは64pxで描画する。
+const px = 32; 
+
+
+const floor = new Image();
+floor.src = './tankParts/floor.png';
+
+var flag = false;
+floor.onload = function() {
+    flag = true;
+};  
+
+var AreaSize = 7; const size = 64;
+// Area 6 * 6 tiles. 64px. -3*64 = -192 
+var LeftX = midX -AreaSize/2 * size; var RightX = midX + AreaSize/2 * size;
+var Top = midY - AreaSize/2 * size; var Bottom = midY + AreaSize/2 * size;
+
+// --------------render---------------------
+function render() {
+    
+    c.clearRect(0,0,endX,endY);
+    
+    if (flag) 
+        drawFloor();
+    stageLine();drawGuide();
+    requestAnimationFrame(render);
+} render();//--------------render-------------------------------
+
+function stageLine() {
+    c.beginPath();
+    for (i = -AreaSize/2; i <= AreaSize/2; i++) { // -3,-2,-1,0,1,2,3
+        c.moveTo(midX+i*size,Top);
+        c.lineTo(midX+i*size,Bottom);
+        c.moveTo(LeftX,midY-i*size);
+        c.lineTo(RightX,midY-i*size);
+    }
+    c.stroke();
+    c.closePath();
+}
+// (midx -192,midy -192) is Left Top
+function drawFloor() {
+    for (row = 0; row < AreaSize; row++) {
+        for (column = 0; column < AreaSize; column++)
+        c.drawImage(floor,LeftX+row*size,
+                        Top+column*size ,size,size);
+    }
+}
+
+function drawGuide() {
+    c.beginPath();
+    c.font='32px serif';
+    c.textAlign = "center";
+    c.fillText('<- A key',LeftX,Top-10);
+    c.fillText('D key ->',RightX,Top-10);
+    c.fillText('Space to shoot',midX,Bottom+size/2);
+    c.closePath();
+}
+
+
+
+
+    </script>
+</body>
+</html>
