@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tank rolling</title>
+    <style>
+        * {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+<script>
+
+//　いつものCanvasセット
+const cvs = document.querySelector('canvas');
+const c = cvs.getContext('2d');
+const endX = cvs.width = window.innerWidth;
+const endY = cvs.height= window.innerHeight;
+const midX = cvs.width /2;
+const midY = cvs.height /2;
+
+// pxは1タイル32pxでsizeは64pxで描画する。
+const px = 32; const size = 64;
+//=======================================================================
+const tanks = 
+    new Array(8).fill().map(() => 
+        new Image());
+
+tanks.map((img, index) => 
+    img.src = `./tankParts/tank0${index + 1}.png`);
+
+console.log(tanks);
+
+// const delcare =============================================
+
+// const tank01 = new Image();
+// tank01.src = './tankParts/tank01.png';
+
+//=====================================================
+
+const bomb01 = new Image();
+bomb01.src = './tankParts/bomb01.png';
+const bomb02 = new Image();
+bomb02.src = './tankParts/bomb02.png';
+const bomb03 = new Image();
+bomb03.src = './tankParts/bomb03.png';
+
+const floor = new Image();
+floor.src = './tankParts/floor.png';
+
+const bullet = new Image();
+bullet.src = './tankParts/bullet.png';
+
+// -------------------------------------
+// const tanks = [
+//     tank01,tank02,tank03,tank04,
+//     tank05,tank06,tank07,tank08,
+// ];
+//============================================================
+const bombs = [
+    bomb01,bomb02,bomb03
+];
+document.addEventListener("keydown", KeyDownHandler, false);
+document.addEventListener("keyup", KeyUpHandler, false);
+var right = false; var left = false; var shot = false;
+
+
+
+var flag = false;
+tanks[0].onload = function() {
+    flag = true;
+};       
+
+// var counter = 1;
+var a = 0; //0-7
+var b = 0;
+// --------------render---------------------
+function render() {
+    
+    c.clearRect(0,0,endX,endY);
+    drawFloor();stageLine();
+    if (flag)
+        drawTank();
+    destroyed();
+    stageLine();
+    drawGuide();
+    drawBullet();
+
+} render();//--------------render-------------------------------
+
+var tankX = midX;var tankY = midY+2*size;
+function drawTank() {
+    tank00 = tanks[a]; 
+    // 戦車の絵を8枚ループさせてアニメを作る
+    c.drawImage(tank00,tankX,tankY,size,size);
+    a++; a = a % 8; // 0~7
+    if (right&& tankX < midX+2*size)
+        tankX += 5;
+    else if (left && midX-3*size <tankX)
+        tankX -= 5;
+    // console.log('tankX,Y:',tankX,tankY);
+    // console.log('L,R:',left,right);
+    
+}
+function destroyed() {
+    bomb00 = bombs[b]; // bombの絵は3枚。
+    c.drawImage(bomb00,midX,midY-size*2,size,size);
+    b++; b = b % 3; // 0~2
+}
+var bulletY = tankY-size/2
+
+function drawBullet(){
+    c.drawImage(bullet,tankX+16,bulletY);
+    if (bulletY > midY-192)
+        bulletY -=10;
+    // console.log(bulletY);
+}
+
+function stageLine() {
+    c.beginPath();
+    c.strokeStyle='#fff';
+    for (i = -3; i<4; i++) { // -3,-2,-1,0,1,2,3
+        c.moveTo(midX+i*size,midY-3*size);
+        c.lineTo(midX+i*size,midY+3*size);
+        c.moveTo(midX-3*size,midY-i*size);
+        c.lineTo(midX+3*size,midY-i*size);
+    }
+    c.stroke();
+    c.closePath();
+}
+// (midx -192,midy -192) is Left Top
+function drawFloor() {
+    let x = midX-192; let y = midY-192;
+    for (row = 0; row < 6; row++) {
+        for (column = 0; column < 6; column++)
+        c.drawImage(floor,x+row*size,y+column*size,size,size);
+    }
+}
+
+function drawGuide() {
+    let top = midY -192;
+    let leftEnd = midX-192;let rightEnd = midX+192;
+    c.beginPath();
+    c.fillStyle = '#fff';
+    c.font='32px serif';
+    c.textAlign = "center";
+    c.fillText('<- A key',leftEnd,top-10);
+    c.fillText('D key ->',rightEnd,top-10);
+    c.fillText('Space to shoot',midX,midY+192+size/2);
+    
+}
+
+function KeyDownHandler(e) {
+    if(e.keyCode == 39||e.keyCode == 68) { 
+        right = true;
+    } else if(e.keyCode == 37||e.keyCode == 65) {
+        left = true;
+    }
+}
+function KeyUpHandler(e) {
+    if (e.keyCode == 39||e.keyCode == 68) {
+        right = false;
+    } else if (e.keyCode == 37||e.keyCode == 65) {
+        left = false;
+    }
+}
+
+
+setInterval(render,100);
+
+    </script>
+</body>
+</html>
