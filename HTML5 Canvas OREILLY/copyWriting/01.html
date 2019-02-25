@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch3 01</title>
+    <style>
+        .one {
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="one"></canvas>
+
+    <form>
+            Text: <input id="textBox" placeholder="your text">
+            <br>
+            Fill Or Stroke :
+            <select id="charStyle">
+            <option value="fill">fill</option>
+            <option value="stroke">stroke</option>
+            <option value="both">both</option>
+            </select>
+            <br>
+        </form>
+
+
+<script> 
+    // c.fillRect(0,0,500,500); // TEST
+// addEventListener('load',loaded,false);
+
+// function loaded() {
+//     canvasApp();
+// }
+// function canvasApp() {
+    
+
+    var msg = 'your text';
+    var charStyle = 'fill';
+
+    var cvs = document.querySelector('canvas')
+    var c = cvs.getContext('2d');
+
+    var formElement 
+    = document.getElementById('textBox');
+
+    formElement.addEventListener
+    ('keyup', textChanged, false);
+
+    formElement 
+    = document.getElementById('charStyle');
+
+    formElement.addEventListener
+        ('change', charChanged, false);
+
+    drawScreen();
+
+
+
+
+    function drawScreen() {
+        let w = cvs.width;
+        let h = cvs.height;
+        let mgn = 10;
+
+        c.fillStyle = '#ffa';
+        c.fillRect(0,0,w,h);
+        console.log(w,h);
+
+        c.strokeStyle = '#000';
+        c.strokeRect
+            (mgn/2,mgn/2,w-mgn,h-mgn);
+        
+        c.font = '50px serif';
+
+        var metrics = c.measureText(msg);
+        console.log(metrics);
+        
+        var x = w/2 - metrics.width /2;
+        var y = h/2;
+        console.log(x,y);
+        
+    }
+    function  textChanged(e) {
+        drawScreen();
+    }
+    function charChanged(e) {
+        drawScreen();
+    }
+
+
+//}
+
+</script>
+</body>
+</html>
